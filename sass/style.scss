@@ -174,23 +174,22 @@ textarea::-webkit-input-placeholder{
 	width: 100%;
 	margin-bottom: 35px;
 	position: relative;
+	left: 0;
 	overflow: hidden;
 }
 .slider__list{
 	position: relative;
+	left: 0;
 	width: 3000px;
-	display: inline-block;
+	list-style: none;
+	// transition: .5s;
 }
 .slider__item{
+	position: relative;
 	float:left;
-	// display: none;
 }
 .slider__item-active{
-	// display: block;
-	// position: absolute;
-	// top: 0;
-	// left: 0;
-	// z-index: 20;
+	float:left;
 }
 	.slider__item-img{
 		width: 100%;
@@ -200,8 +199,9 @@ textarea::-webkit-input-placeholder{
 			position: absolute;
 			bottom: 0;
 			left: 0;
-			z-index: 30;
+			z-index: 40;
 			width: 100%;
+			box-sizing: border-box;
 			padding: 15px 25px;
 			color: #fff;
 			background-color: rgba(0,0,0,0.4)
@@ -418,6 +418,9 @@ textarea::-webkit-input-placeholder{
 					color: #fff;
 					text-decoration: underline;
 				}
+					.navigation-list__item-link:hover{
+						text-decoration: none;
+					}
 	.other-links{
 		float: right;
 	}
@@ -428,8 +431,8 @@ textarea::-webkit-input-placeholder{
 		.downloads__link{
 			display: block;
 			float: left;
-			width: 90px;
-			height: 30px;
+			max-width: 90px;
+			max-height: 35px;
 			&:first-child{
 				margin-right: 10px;
 			}

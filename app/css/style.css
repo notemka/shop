@@ -817,6 +817,9 @@ textarea::-webkit-input-placeholder {
   color: #fff;
   text-decoration: underline; }
 
+.navigation-list__item-link:hover {
+  text-decoration: none; }
+
 .other-links {
   float: right; }
 
@@ -827,8 +830,8 @@ textarea::-webkit-input-placeholder {
 .downloads__link {
   display: block;
   float: left;
-  width: 90px;
-  height: 30px; }
+  max-width: 90px;
+  max-height: 35px; }
   .downloads__link:first-child {
     margin-right: 10px; }
 

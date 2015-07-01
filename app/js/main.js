@@ -4,48 +4,48 @@
 			this.setUpListeners();
 		},
 
-		setUpListeners: function() {
+		setUpListeners: function(form) {
 			$('#call-form').on('submit', this.sendMail);
 			$('#call-form').on('submit', this.validateForm);
 			$('.slider_controls-button').on('click', this.sliderBox);
+			$('input[placeholder], textarea[placeholder]').placeholder();
 		},
 
 		//================== ОТПРАВКА ФОРМЫ ===============//
-		// sendMail: function(form) {
-		// var 
-		// 	url = '../php/mail.php',
-		// 	dataType = 'JSON',
-		// 	defObject = app.ajaxForm(form, url, dataType);
+		sendMail: function(form) {
+		var 
+			url = '../php/mail.php',
+			dataType = 'JSON',
+			defObject = app.ajaxForm(form, url, dataType);
+		},
+		ajaxForm: function (form, url, dataType) {
 
-		// },
-		// ajaxForm: function (form, url, dataType) {
+			var data = form.serialize(),
+				defObj = $.ajax({
+					url: url,
+					type: 'POST',
+					dataType: dataType,
+					data: data,
+					// beforeSend: function(){
+					// 	form.find('#send-btn').attr('disabled', 'disabled');
+					// }
+				})
+				.done(function () {
+					if (msg === 'OK') {
+						app.successResult(form);
+					} else {
+						app.failResult(form);
+					}
+				})
+				.fail(function() {
+					console.log('ошибка');
+				})
+				.always(function() {
+				});
 
-		// 	var data = form.serialize(),
-		// 		defObj = $.ajax({
-		// 			url: url,
-		// 			type: 'POST',
-		// 			dataType: dataType,
-		// 			data: data,
-		// 			beforeSend: function(){
-		// 				form.find('#send-btn').attr('disabled', 'disabled');
-		// 			}
-		// 		})
-		// 		.done(function () {
-		// 			if (msg === 'OK') {
-		// 				app.successResult(form);
-		// 			} else {
-		// 				app.failResult(form);
-		// 			}
-		// 		})
-		// 		.fail(function() {
-		// 			console.log('ошибка');
-		// 		})
-		// 		.always(function() {
-		// 		});
-
-		// 	return defObj;
+			return defObj;
 				
-		// },
+		},
 
 		successResult: function (form) {
 			var markup = '<div class="form__success-message">Ваша заявка принята!</div>';
@@ -107,7 +107,7 @@
 		        if(notEmptyField){
 		            isValid = true;   
 		        } else {
-		            $this.tooltips({
+		        	$this.tooltips({
 		                content : 'Введите ваш телефон',
 		                position : 'right'
 		            });
