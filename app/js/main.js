@@ -7,7 +7,7 @@
 		setUpListeners: function() {
 			$('#call-form').on('submit', this.sendMail);
 			$('#call-form').on('submit', this.validateForm);
-			$('#slider-btn').on('click', this.sliderBox);
+			$('.slider_controls-button').on('click', this.sliderBox);
 		},
 
 		//================== ОТПРАВКА ФОРМЫ ===============//
@@ -170,42 +170,49 @@
 			e.preventDefault();
 
 			var $this = $(this),
-				sliderWrap = $this.closest('.slider'),
+				sliderWrap = $('#site-slider'), 
 				sliderList = sliderWrap.find('.slider__list'),
 				sliderItems = sliderList.find('.slider__item'),
-				activeSlide = sliderItems.filter('.slider__item__active'),
+				activeSlide = sliderItems.filter('.slider__item-active'),
 				nextSlide = activeSlide.next(),
 				prevSlide = activeSlide.prev(),
 				firstSlide = sliderItems.first(),
 				lastSlide = sliderItems.last(),
+                sliderOffset = sliderWrap.offset().left,
 				position = 0;
 
-			if($(this).hasClass('slider_controls-button_next')){
+			if($this.hasClass('slider_controls-button_next')){
 				if(nextSlide.length){
-					app.findSlidePosition(nextSlide);
+					position = nextSlide.offset().left - sliderOffset;
+					// app.findSlidePosition(nextSlide);
 					app.addActiveClass(nextSlide);
 				} else{
-					app.findSlidePosition(firstSlide);
+					position = firstSlide.offset().left - sliderOffset;
+					// app.findSlidePosition(firstSlide);
 					app.addActiveClass(firstSlide);
 				}
 			} else{
 				if(prevSlide.length){
-					app.findSlidePosition(prevSlide);
+					position = prevSlide.offset().left - sliderOffset;
+					// app.findSlidePosition(prevSlide);
 					app.addActiveClass(prevSlide);
 				} else{
-					app.findSlidePosition(lastSlide);
+					position = lastSlide.offset().left - sliderOffset;
+					// app.findSlidePosition(lastSlide);
 					app.addActiveClass(lastSlide);
 				}
 			}
-			sliderList.css('left', '-=' + position + 'px');
+			sliderList.css({
+                'left' : '-=' + position + 'px'
+                });
 		},
-		findSlidePosition: function(slide){
-			var $this = $(this),
-				sliderWrap = $this.closest('.slider'),
-				sliderOffset = sliderWrap.offset().left;
+		// findSlidePosition: function(slide){
+		// 	var sliderWrap = $('#site-slider'),
+		// 		sliderOffset = sliderWrap.offset().left,
+		// 		position = 0;
 
-			position = slide.offset().left - sliderOffset;
-		},
+		// 	position = slide.offset().left - sliderOffset;
+		// },
 		addActiveClass: function(regSlide){
 			regSlide.addClass('slider__item-active').siblings().removeClass('slider__item-active');
 		}
