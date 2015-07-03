@@ -367,9 +367,6 @@ th {
   font-weight: normal;
   font-style: normal; }
 
-.no-rgba .slider__item-description {
-  background-color: #000; }
-
 /************ tooltips *************/
 .tooltip-wrapper {
   margin: 50px; }
@@ -476,7 +473,9 @@ body {
   float: left; }
 
 .logo {
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  display: block;
+  text-decoration: none; }
 
 .form {
   text-align: center;
@@ -528,7 +527,8 @@ body {
 .form__field__comment {
   width: 197px;
   height: 60px;
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  resize: none; }
 
 input::-webkit-input-placeholder {
   color: #dae1eb; }
@@ -554,7 +554,8 @@ textarea::-webkit-input-placeholder {
   float: left; }
 
 .form__reset-btn {
-  float: right; }
+  float: right;
+  background-color: #d3d1d1; }
 
 .form__error-message {
   color: #d86868; }
@@ -563,15 +564,16 @@ textarea::-webkit-input-placeholder {
   color: #6ac47a; }
 
 .img-box {
-  margin-left: -6px;
+  margin-left: -5px;
   margin-bottom: 20px; }
 
-.img-box__img {
+.img-box__link {
   display: inline-block;
   width: 70px;
   height: 70px;
-  margin-left: 6px;
-  margin-bottom: 5px; }
+  margin-left: 5px;
+  margin-bottom: 8px;
+  text-decoration: none; }
 
 .contacts {
   background-color: #f4f6f9;
@@ -637,7 +639,7 @@ textarea::-webkit-input-placeholder {
   box-sizing: border-box;
   padding: 15px 25px;
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.4); }
+  background-image: url("../img/slider-description.png"); }
 
 .slider__item-description__link {
   display: block;
@@ -723,61 +725,137 @@ textarea::-webkit-input-placeholder {
 .slider__list {
   list-style: none;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  box-sizing: border-box; }
 
+/********************* GOODS *********************/
 .goods {
   display: block;
   margin-left: -20px;
   margin-bottom: 25px; }
 
 .goods__title-wrapper {
-  width: 100%;
-  background: url(../img/goods-block-line.png) no-repeat 4% center, url(../img/goods-block-line.png) no-repeat right center; }
+  text-align: center;
+  overflow: hidden;
+  margin-left: 20px; }
 
 .goods__title {
-  font-size: 25px;
   font-family: elektra_light_probold;
-  text-align: center;
-  margin-left: 20px;
-  margin-bottom: 10px; }
+  font-size: 25px;
+  padding: 0 15px;
+  display: inline-block;
+  position: relative; }
+  .goods__title:before, .goods__title:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    height: 1px;
+    background: #5c7b98;
+    width: 2000px; }
+  .goods__title:before {
+    left: 100%; }
+  .goods__title:after {
+    right: 100%; }
 
-.goods__wrapper {
-  text-decoration: none;
+.goods__list {
+  list-style: none;
+  margin: 0;
+  padding: 10px 5px 0 0;
+  overflow: hidden; }
+
+.goods__item {
   float: left;
-  width: 211px;
+  width: 208px;
   height: 210px;
   margin-left: 20px;
   margin-bottom: 10px;
   padding: 10px 10px;
   border: 1px solid #dae1eb;
   overflow: hidden; }
-  .goods__wrapper:hover {
+  .goods__item:hover {
     box-shadow: 0 0 15px #999; }
 
-.description-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden; }
-
-.description-list__item {
-  position: relative; }
-  .description-list__item:first-child {
-    height: 90px;
-    margin-bottom: 20px; }
-
-.description-list__item-link {
-  position: absolute;
-  top: 25%;
-  left: 45%;
+.goods__description {
+  color: #5c7b98;
   display: block;
+  width: 100%;
+  height: 100%; }
+
+.goods__description__title {
+  margin-bottom: 20px; }
+
+.goods__description__title-img {
+  width: 85px;
+  height: 90px;
+  float: left;
+  position: relative; }
+  .goods__description__title-img img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto; }
+
+.description-list__title-link-wrap {
+  width: 120px;
+  height: 90px;
+  float: right; }
+
+.description-list__title-link {
+  width: 120px;
+  height: 90px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
   color: #00b9fe; }
-  .description-list__item-link:hover {
+  .description-list__title-link:hover {
     color: #613993; }
 
-.description-list__item__table-col {
-  width: 50%;
-  padding: 1px; }
+.description-options__item__table {
+  width: 100%; }
+
+.description-options__item__table-col {
+  padding: 1px;
+  width: 50%; }
+
+.scroll-top {
+  background: #00b9fe;
+  color: #fff;
+  padding: 10px 15px;
+  text-decoration: none;
+  font-family: elektra_light_probold;
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  z-index: 100;
+  font-size: 15px; }
+  .scroll-top:before, .scroll-top:after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 50%;
+    margin-top: -7px;
+    margin-left: -7px;
+    border-style: solid;
+    border-width: 0 8px 8px 8px;
+    border-color: transparent transparent #00b9fe transparent; }
+  .scroll-top:after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 100;
+    bottom: 0;
+    left: 50%;
+    margin-top: -7px;
+    margin-left: -7px;
+    border-style: solid;
+    border-width: 0 8px 8px 8px;
+    border-color: transparent transparent #fff transparent; }
 
 .page-footer {
   min-width: 1000px;
@@ -797,28 +875,32 @@ textarea::-webkit-input-placeholder {
   float: right;
   margin: 60px 0 0; }
 
-.navigation-list {
+.navigation__list {
   list-style: none;
   float: left;
   margin: 0;
   margin-left: 50px;
-  padding: 0; }
-  .navigation-list:first-child {
-    margin-left: 0px; }
-
-.navigation-list__item {
+  padding: 0;
   color: #fff;
   font-size: 15px;
-  padding: 5px 10px; }
-  .navigation-list__item:first-child {
-    font-family: elektra_light_probold; }
+  font-family: elektra_light_probold; }
+  .navigation__list:first-child {
+    margin-left: 0; }
 
-.navigation-list__item-link {
+.navigation__item {
   color: #fff;
-  text-decoration: underline; }
+  padding: 5px 0; }
 
-.navigation-list__item-link:hover {
-  text-decoration: none; }
+.navigation__title {
+  margin-bottom: 10px;
+  font-size: 16px; }
+
+.navigation__link {
+  color: #fff;
+  text-decoration: underline;
+  font-family: elektra_light_proregular; }
+  .navigation__link:hover {
+    text-decoration: none; }
 
 .other-links {
   float: right; }

@@ -2,49 +2,55 @@
 	var app = {
 		init: function(){
 			this.setUpListeners();
-		},
-
-		setUpListeners: function(form) {
-			$('#call-form').on('submit', this.sendMail);
-			$('#call-form').on('submit', this.validateForm);
-			$('.slider_controls-button').on('click', this.sliderBox);
 			$('input[placeholder], textarea[placeholder]').placeholder();
 		},
 
-		//================== ОТПРАВКА ФОРМЫ ===============//
-		sendMail: function(form) {
-		var 
-			url = '../php/mail.php',
-			dataType = 'JSON',
-			defObject = app.ajaxForm(form, url, dataType);
+		setUpListeners: function() {
+			var scrollBtn = $('#scroll-top');
+			// $('#call-form').on('submit', this.validateForm);
+			$('#call-form').on('submit', this.sendMail);
+			$('.slider_controls-button').on('click', this.sliderBox);
+			scrollBtn.on('click', this.scrollTop);
+			$(window).on('scroll', this.scrollTopBtnShow)
 		},
-		ajaxForm: function (form, url, dataType) {
 
-			var data = form.serialize(),
-				defObj = $.ajax({
-					url: url,
-					type: 'POST',
-					dataType: dataType,
-					data: data,
-					// beforeSend: function(){
-					// 	form.find('#send-btn').attr('disabled', 'disabled');
-					// }
-				})
-				.done(function () {
-					if (msg === 'OK') {
-						app.successResult(form);
-					} else {
-						app.failResult(form);
-					}
-				})
-				.fail(function() {
-					console.log('ошибка');
-				})
-				.always(function() {
-				});
+		//================== ОТПРАВКА ФОРМЫ ===============//
+		sendMail: function() {
+			var 
+				form = $(this),
+				url = '../php/mail.php',
+				dataType = 'JSON',
+				defObject = _ajaxForm(form, url, dataType);
 
-			return defObj;
-				
+			function _ajaxForm(form, url, dataType) {
+
+				if(app.validateForm(form)) {
+
+					var data = form.serialize(),
+						defObject = $.ajax({
+								url: url,
+								type: 'POST',
+								dataType: dataType,
+								data: data,
+								// beforeSend: function(){
+								// 	form.find('#send-btn').attr('disabled', 'disabled');
+								// }
+							})
+						.done(function (ans) {
+							var msg = ans.status;
+
+							if (msg === 'OK') {
+								app.successResult(form);
+							} else {
+								app.failResult(form);
+							}
+						})
+						.fail(function() {
+							console.log('ошибка в php');
+							app.failResult;
+						});
+				};
+			};	
 		},
 
 		successResult: function (form) {
@@ -71,7 +77,7 @@
 		    
 		validateForm: function(e){
 
-		    e.preventDefault();
+		    // e.preventDefault();
 
 		    var
 		        form = $(this),
@@ -80,7 +86,7 @@
 		        day = form.find("[data-validation='call-day']"),
 		        month = form.find("[data-validation='call-month']"),
 		        comment = form.find("[data-validation='user-comment']"),
-		        isValid = false;    // прошла валидацию форма или нет
+		        isValid = false;    
 
 		    name.each(function(){
 		        var 
@@ -160,7 +166,7 @@
 		            isValid = false;
 		        }    
 		    });
-
+		    return isValid;
 		},
 
 
@@ -184,21 +190,17 @@
 			if($this.hasClass('slider_controls-button_next')){
 				if(nextSlide.length){
 					position = nextSlide.offset().left - sliderOffset;
-					// app.findSlidePosition(nextSlide);
 					app.addActiveClass(nextSlide);
 				} else{
 					position = firstSlide.offset().left - sliderOffset;
-					// app.findSlidePosition(firstSlide);
 					app.addActiveClass(firstSlide);
 				}
 			} else{
 				if(prevSlide.length){
 					position = prevSlide.offset().left - sliderOffset;
-					// app.findSlidePosition(prevSlide);
 					app.addActiveClass(prevSlide);
 				} else{
 					position = lastSlide.offset().left - sliderOffset;
-					// app.findSlidePosition(lastSlide);
 					app.addActiveClass(lastSlide);
 				}
 			}
@@ -206,15 +208,30 @@
                 'left' : '-=' + position + 'px'
                 });
 		},
-		// findSlidePosition: function(slide){
-		// 	var sliderWrap = $('#site-slider'),
-		// 		sliderOffset = sliderWrap.offset().left,
-		// 		position = 0;
-
-		// 	position = slide.offset().left - sliderOffset;
-		// },
 		addActiveClass: function(regSlide){
 			regSlide.addClass('slider__item-active').siblings().removeClass('slider__item-active');
+		},
+
+		//============= SCROLL BUTTON =============//
+		
+		scrollTopBtnShow: function(){
+			
+			var position = $(window).scrollTop(),
+				scrollBtn = $('#scroll-top');
+
+			if(position > 200){
+				scrollBtn.fadeIn(300);
+			} else {
+				scrollBtn.fadeOut(300);
+			}
+
+		},
+		scrollTop: function(e){
+			e.preventDefault();
+
+			var win = $(window);
+
+			win.scrollTop(0);
 		}
 	}
 	app.init();

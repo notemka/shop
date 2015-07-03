@@ -6,7 +6,6 @@ header("Content-Type: application/json");
 if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 date_default_timezone_set('Euroupe/Moscow');
-require_once "../libs/PHPMailer/class.phpmailer.php";
 
 	$name = $_POST['name'];
 	$telephone = $_POST['phone'];
@@ -27,8 +26,8 @@ require_once "../libs/PHPMailer/class.phpmailer.php";
 	        $mail->Port = 465;
 	        $mail->CharSet = 'UTF-8';
 
-	        $mail->Username = 'majya-mail@yandex.ru';
-	        $mail->Password = '59emZFH8IjnOrRw';
+	        $mail->Username = 'majya-mail';
+	        $mail->Password = '135vzlom';
 	        $mail->From = 'majya-mail@yandex.ru';
 	        $mail->FromName = 'Пользователь';
 	        $mail->addAddress('emma.saitgaraeva@gmail.com', 'Эмме Хайруллиной');
