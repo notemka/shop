@@ -27,7 +27,7 @@ date_default_timezone_set('Euroupe/Moscow');
 	        $mail->CharSet = 'UTF-8';
 
 	        $mail->Username = 'majya-mail';
-	        $mail->Password = '135vzlom';
+	        $mail->Password = '59emZFH8IjnOrRw';
 	        $mail->From = 'majya-mail@yandex.ru';
 	        $mail->FromName = 'Пользователь';
 	        $mail->addAddress('emma.saitgaraeva@gmail.com', 'Эмме Хайруллиной');

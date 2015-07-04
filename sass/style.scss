@@ -29,7 +29,7 @@ body{
 	width: 1000px;
 	min-height: 100%;
 	margin: 0 auto;
-	padding: 40px 0 30px;
+	padding: 40px 0 10px;
 	font-family: $thin_font;
 }
 .menu{
@@ -87,8 +87,6 @@ body{
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	scrollbar-face-color: $color;
-
-	
 }
 .form__field__day::-webkit-scrollbar-thumb {
 		background-color: $color;
@@ -346,6 +344,7 @@ textarea::-webkit-input-placeholder{
 .goods__list{
     list-style: none;
 	margin: 0;
+	margin-bottom: 25px;
 	padding: 10px 5px 0 0;
 	overflow: hidden;
 }
@@ -391,12 +390,13 @@ textarea::-webkit-input-placeholder{
 	float: right;
 }
 .description-list__title-link{
-	width: 120px;
+	width: 130px;
 	height: 90px;
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center;
 	color: $color;
+	font-size: 15px;
 	&:hover{
 		color: #613993;
 	}
@@ -474,14 +474,14 @@ textarea::-webkit-input-placeholder{
 	.navigation{
 		width: 740px;
 		float: right;
-		margin: 60px 0 0;
+		margin: 50px 0 0;
 	}
 		.navigation__list{
 			list-style: none;
 			// display: inline-block;
 			float: left;
 			margin: 0;
-			margin-left: 50px;
+			margin-left: 70px;
 			padding: 0;
 			color: #fff;
 			font-size: 15px;
