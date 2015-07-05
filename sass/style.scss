@@ -133,11 +133,12 @@ textarea::-webkit-input-placeholder{
 .img-box{
 	margin-left: -5px;
 	margin-bottom: $margin-bottom;
+	min-width: 230px;
 }
 .img-box__link{
 	display: inline-block;
-	width: 70px;
-	height: 70px;
+	min-width: 70px;
+	min-height: 70px;
 	margin-left: 5px;
 	margin-bottom: 8px;
 	text-decoration: none;

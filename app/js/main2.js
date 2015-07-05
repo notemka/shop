@@ -7,57 +7,34 @@
 
 		setUpListeners: function() {
 			var siteForm = $('#call-form');
-			
+
 			siteForm.on('submit', this.validateForm);
 			siteForm.on('submit', this.sendMail);
 			$('.slider_controls-button').on('click', this.sliderBox);
-			$('#scroll-top').on('click', this.scrollTop);
+			$('#scroll-btn').on('click', this.scrollTop);
 			$(window).on('scroll', this.scrollTopBtnShow)
 		},
 
 		//================== ОТПРАВКА ФОРМЫ ===============//
-		sendMail: function(form) {
-			// form.preventDefault();
-			var 
-				form = $(this),
-				url = '../php/mail.php',
-				dataType = 'JSON',
-				defObject = _ajaxForm(form, url, dataType);
+		sendMail: function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize(),
+                url = '../app/php/mail.php';
 
-			function _ajaxForm(form, url, dataType) {
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'post',
+                data: formData,
+                success: function(data){
+                    console.log(data);
 
-				if(app.validateForm(form)) {
-
-					var data = form.serialize(),
-						defObject = $.ajax({
-								url: url,
-								type: 'POST',
-								dataType: dataType,
-								data: data,
-								// beforeSend: function(){
-								// 	form.find('#send-btn').attr('disabled', 'disabled');
-								// }
-							})
-						.done(function (ans) {
-							var msg = ans.status;
-							console.log(ans);
-
-							if (msg === 'OK') {
-								app.successResult(form);
-							} else {
-								app.failResult(form);
-							}
-						})
-						.fail(function() {
-							console.log('ошибка в php');
-							app.failResult;
-						});
-
-				console.log(data);
-
-				return defObject;
-				}
-			};	
+                    app.successResult(form);
+                },
+                failure: function(){
+                	app.failResult(form);
+                }
+            });
 		},
 
 		successResult: function (form) {
@@ -82,7 +59,7 @@
 
 	    //============== ВАЛИДАЦИЯ =============//
 		    
-		validateForm: function(form){
+		validateForm: function(e){
 
 		    // e.preventDefault();
 
@@ -138,7 +115,7 @@
 		        } else {
 		            $this.tooltips({
 		                content : 'Выберете день звонка',
-		                position : 'bottom'
+		                position : 'left'
 		            });
 		            isValid = false;
 		        }    
